@@ -1,0 +1,32 @@
+{
+  "name": "groupon",
+  "version": "0.1.0",
+  "description": "A groupon wxapp",
+  "scripts": {
+    "dev": "gulp watch",
+    "build": "gulp",
+    "eslint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:meathill/groupon-wxapp.git"
+  },
+  "keywords": [],
+  "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "gulp": "^4.0.2",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-stylus": "^2.7.0"
+  },
+  "dependencies": {
+    "animate.css": "^3.7.2",
+    "lodash-es": "^4.17.15",
+    "spinkit": "^2.0.1",
+    "valid-url": "^1.0.9"
+  }
+}
