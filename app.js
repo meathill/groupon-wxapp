@@ -25,13 +25,14 @@ App({
     AV.init({
       appId: LEAN_APP_ID,
       appKey: LEAN_APP_SECRET,
+      serverURLs: 'https://jielong.api.meathill.com',
     });
     this.globalData.user = AV.User.current();
 
     Promise.all([userInfo])
       .then(() => {
         if (this.userInfoReadyCallback) {
-          this.userInfoReadyCallback();
+          this.userInfoReadyCallback(this.globalData);
         } else {
           this.userInfoReadyCallback = true;
         }
@@ -58,4 +59,4 @@ App({
     userInfo: null,
     scene: null,
   },
-})
+});

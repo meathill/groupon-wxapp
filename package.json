@@ -26,6 +26,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "lodash-es": "^4.17.15",
+    "lodash.keyby": "^4.6.0",
     "spinkit": "^2.0.1",
     "valid-url": "^1.0.9"
   }

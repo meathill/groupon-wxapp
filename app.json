@@ -1,12 +1,14 @@
 {
+  "debug": true,
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/group/group",
+    "pages/group/new"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "思否接龙",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",

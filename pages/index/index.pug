@@ -1,0 +1,21 @@
+view.groupon-list(wx:if!="{{list && list.length > 0}}")
+  view.groupon-item(
+    wx:for="{{list}}",
+    wx:key="{{item.id}}",
+    bindtap="doActive",
+    data-index="{{index}}",
+
+  )
+
+view.footer
+  navigator.add-new-button.footer-button(
+    wx:if="{{logged}}",
+    url="/pages/group/new"
+  ) 创建接龙
+  button.add-new-button(
+    wx:else,
+    open-type="getUserInfo",
+    bindgetuserinfo="onGotUserInfo",
+    disabled="{{isLoggingIn}}",
+    loading="{{isLoggingIn}}",
+  ) 创建接龙

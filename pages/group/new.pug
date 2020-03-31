@@ -1,0 +1,47 @@
+form.group.new-group(
+  bindsubmit="onSubmit",
+)
+  view.form-group
+    input.form-control(
+      placeholder="接龙标题",
+      name="title",
+      confirm-type="next",
+    )
+
+  view.form-group
+    textarea.form-control(
+      placeholder="产品简介",
+      placeholder-style="form-control-placeholder",
+      name="description",
+      confirm-type="next",
+    )
+
+  view.form-group.d-flex
+    input.form-control.w-50.input-price(
+      placeholder="单价",
+      name="price",
+      type="digit",
+      confirm-type="next",
+      value="{{price / 100}}",
+    )
+    text.label-text 元
+
+  view.form-group
+    label.d-block 上传缩略图
+
+    view.d-flex
+      button.upload-button(
+        type="default",
+        bindtap="doUpload",
+      )
+        icon(type="download", size="48")
+
+      image.thumbnail(
+        wx:if="{{thumbnail}}",
+        src="{{thumbnail}}",
+      )
+
+  view.footer
+    button.footer-button.add-new-button(
+      form-type="submit",
+    ) 创建
