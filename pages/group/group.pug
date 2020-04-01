@@ -1,1 +1,46 @@
-view.group
+view.group-detail(wx:if="{{isLoaded}}")
+  view.d-flex
+    image.thumbnail(
+      src="{{thumbnail}}",
+    )
+
+    view.info
+      view.h1 {{title}}
+      view.price ¥
+        text.price-number {{price}}
+
+  view.description
+    text {{description}}
+
+form.join-in-form(
+  wx:if="{{isLoaded}}",
+  bindsubmit="doSubmit",
+)
+  view.h2 我要接龙
+  view.d-flex.form-group.mb-0
+    input.form-control.input-number.mr-3(
+      auto-focus,
+      type="number",
+      placeholder="接龙个数",
+    )
+
+    button(
+      wx:if="{{logged}}",
+      type="primary",
+      open-type="getUserInfo",
+      bindgetuserinfo="onGotUserInfo",
+      disabled="{{isLoggingIn}}",
+      loading="{{isLoggingIn}}",
+    ) 接龙
+    button(
+      wx:else,
+      type="primary",
+      form-type="submit",
+      loading="{{isSaving}}",
+      disabled="{{isSaving}}",
+    ) 接龙
+
+view.footer
+  button.footer-button(
+    open-type="share",
+  ) 分享给群友

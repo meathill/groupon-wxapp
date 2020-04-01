@@ -3,6 +3,7 @@
 import AV from "../../libs/av-weapp-min";
 import {GROUP} from "../../model/Group";
 import {merge} from "../../helper/util";
+import user from '../../mixins/user';
 
 /* global wx */
 
@@ -67,7 +68,7 @@ Page({
   onGotUserInfo(event) {
     const {userInfo} = event.detail;
     this.setData({
-      isLogin: true,
+      isLoggingIn: true,
     });
 
     app.globalData.userInfo = userInfo;

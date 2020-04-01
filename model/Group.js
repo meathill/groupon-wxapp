@@ -10,7 +10,7 @@ class Group extends AV.Object {
   get title() {
     return this.get('title');
   }
-  set url(value) {
+  set title(value) {
     this.set('title', value);
   }
 

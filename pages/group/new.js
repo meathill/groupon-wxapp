@@ -1,5 +1,8 @@
 import {File} from '../../libs/av-weapp-min';
-import {chooseImage} from "../../libs/Weixin";
+import {alert, chooseImage} from "../../libs/Weixin";
+import Group from "../../model/Group";
+
+/* global wx */
 
 Page({
   data: {
@@ -37,7 +40,19 @@ Page({
       });
   },
 
-  onSubmit(event) {
-
+  onSubmit({detail}) {
+    const {value} = detail;
+    value.thumbnail = this.data.thumbnail;
+    const group = new Group();
+    for (const key in value) {
+      group[key] = value[key];
+    }
+    group.save()
+      .then(saved => {
+        alert('创建成功');
+        wx.navigateTo({
+          url: '/pages/group/group?id=' + saved.id,
+        });
+      });
   },
 });

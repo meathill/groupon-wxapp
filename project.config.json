@@ -62,6 +62,14 @@
 					"id": -1,
 					"name": "new group",
 					"pathName": "pages/group/new",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "detail",
+					"pathName": "pages/group/group",
+					"query": "id=5e83fc4e546eaa006a0c17e4",
 					"scene": null
 				}
 			]

@@ -1,3 +1,6 @@
+/***************
+ * Reset
+ **************/
 page,
 view,
 form,
@@ -10,6 +13,10 @@ page
   font-size 16px
   min-height 100%
 
+
+/***************
+ * Components
+ **************/
 .footer
   background-color white
   box-shadow 0 -2rpx 0 rgba(black, .1)
@@ -30,6 +37,38 @@ page
   line-height 2.5em
   text-align center
 
+
+/***************
+ * Form
+ **************/
+.form-group
+  margin-bottom 1em
+
+.form-control
+  border 1rpx solid #EEE
+  border-radius 8rpx
+
+  input&
+    line-height 2.5em
+    height 2.5em
+    padding 0 .5em
+
+  textarea&
+    line-height 2em
+    height 6em
+    padding .5em
+    width 100%
+
+.form-control-placeholder
+  line-height 2em
+
+.input-number
+  text-align right
+
+
+/***************
+ * Layout
+ **************/
 .w-50
   width 50%
 
@@ -38,3 +77,9 @@ page
 
 .d-flex
   display flex
+
+.mb-0
+  margin-bottom 0
+
+.mr-3
+  margin-right 1em
