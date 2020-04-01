@@ -2,21 +2,24 @@ import {GROUP} from "../../model/Group";
 import Member from "../../model/Member";
 import {Query} from "../../libs/av-weapp-min";
 import {alert} from '../../libs/Weixin';
+import user from "../../mixins/user";
 
 const app = getApp();
 
-Page({
+const config = Object.assign({
   data: {
     logged: false,
     isLoggingIn: false,
     isLoaded: false,
     isSaving: false,
+    isLoadingList: true,
 
     id: '',
     thumbnail: '',
     description: '',
     price: null,
     me: null,
+    list: null,
   },
 
   doLoad() {
@@ -36,6 +39,28 @@ Page({
         });
       })
       .then(() => {
+        const list = new Query(Member);
+        list
+          .equalTo('group', this.group)
+          .include('user');
+        return list.find();
+      })
+      .then(list => {
+        list = list.map(item => {
+          item = item.toJSON();
+          if (item.user.objectId === app.globalData.user.id) {
+            this.setData({
+              me: item.number,
+            });
+          }
+          return item;
+        });
+        this.setData({
+          list,
+          isLoadingList: false,
+        });
+      })
+      .then(() => {
         wx.hideLoading();
       });
   },
@@ -48,17 +73,19 @@ Page({
   },
   doSubmit({detail}) {
     const {value} = detail;
+    const {number} = value;
     this.setData({
       isSaving: true,
     });
     const member = new Member();
-    member.number = value;
+    member.number = number;
     member.group = this.group;
+    member.user = app.globalData.user;
     member.save()
       .then(() => {
         alert('接龙成功');
         this.set({
-          me: value,
+          me: number,
         });
       })
       .then(() => {
@@ -92,4 +119,5 @@ Page({
       path: '/pages/detail/detail?id=' + this.data.id,
     };
   },
-});
+}, user);
+Page(config);

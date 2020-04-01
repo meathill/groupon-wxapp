@@ -12,33 +12,57 @@ view.group-detail(wx:if="{{isLoaded}}")
   view.description
     text {{description}}
 
-form.join-in-form(
-  wx:if="{{isLoaded}}",
-  bindsubmit="doSubmit",
-)
-  view.h2 我要接龙
-  view.d-flex.form-group.mb-0
-    input.form-control.input-number.mr-3(
-      auto-focus,
-      type="number",
-      placeholder="接龙个数",
-    )
+block(wx:if="{{isLoaded}}")
+  view.join-in-form(wx:if="{{me}}")
+    view.h2.text-success.d-flex.align-items-center
+      icon.mr-2(type="success", size="16")
+      text 已参与
+    view.me
+      | 个数：
+      text.text-big-number {{me}}
 
-    button(
-      wx:if="{{logged}}",
-      type="primary",
-      open-type="getUserInfo",
-      bindgetuserinfo="onGotUserInfo",
-      disabled="{{isLoggingIn}}",
-      loading="{{isLoggingIn}}",
-    ) 接龙
-    button(
-      wx:else,
-      type="primary",
-      form-type="submit",
-      loading="{{isSaving}}",
-      disabled="{{isSaving}}",
-    ) 接龙
+  form.join-in-form(
+    wx:else,
+    bindsubmit="doSubmit",
+  )
+    view.h2 我要接龙
+    view.d-flex.form-group.mb-0
+      input.form-control.input-number.mr-3(
+        auto-focus,
+        type="number",
+        placeholder="接龙个数",
+        name="number",
+      )
+
+      button(
+        wx:if="{{logged}}",
+        type="primary",
+        form-type="submit",
+        loading="{{isSaving}}",
+        disabled="{{isSaving}}",
+      ) 接龙
+      button(
+        wx:else,
+        type="primary",
+        open-type="getUserInfo",
+        bindgetuserinfo="onGotUserInfo",
+        disabled="{{isLoggingIn}}",
+        loading="{{isLoggingIn}}",
+      ) 接龙
+
+view.member-list(wx:if!="{{list && list.length > 0}}")
+  view.h2 Ta 们已经加入
+  view.member-item(
+    wx:for="{{list}}",
+    wx:key="objectId",
+  )
+    view.member-number {{item.number}}
+    image.member-avatar(src="{{item.user.avatarUrl}}")
+    view.member-nickname {{item.user.nickName}}
+
+view.no-member(wx:elif="{{!isLoadingList}}")
+  text 还没人加入，快来做第一个吧～
+
 
 view.footer
   button.footer-button(

@@ -20,6 +20,13 @@ class Member extends AV.Object {
   set group(value) {
     this.set('group', value);
   }
+
+  get user() {
+    return this.get('user');
+  }
+  set user(value) {
+    this.set('user', value);
+  }
 }
 
 AV.Object.register(Member, MEMBER);
