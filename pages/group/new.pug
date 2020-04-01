@@ -3,9 +3,10 @@ form.group.new-group(
 )
   view.form-group
     input.form-control(
-      placeholder="接龙标题",
+      placeholder="接龙产品",
       name="title",
       confirm-type="next",
+      maxlength="10",
     )
 
   view.form-group
@@ -14,6 +15,7 @@ form.group.new-group(
       placeholder-style="form-control-placeholder",
       name="description",
       confirm-type="next",
+      maxlength="100"
     )
 
   view.form-group.d-flex

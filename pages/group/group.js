@@ -74,6 +74,9 @@ const config = Object.assign({
   doSubmit({detail}) {
     const {value} = detail;
     const {number} = value;
+    if (!number) {
+      return alert('请填写参团数量');
+    }
     this.setData({
       isSaving: true,
     });

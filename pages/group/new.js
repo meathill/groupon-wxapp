@@ -44,7 +44,11 @@ Page({
     const {value} = detail;
     value.thumbnail = this.data.thumbnail;
     const group = new Group();
+    value.price *= 100;
     for (const key in value) {
+      if (!value[key]) {
+        return alert('所有表单均为必填项，请填写 ' + key);
+      }
       group[key] = value[key];
     }
     group.save()

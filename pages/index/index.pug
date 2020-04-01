@@ -1,11 +1,13 @@
 view.groupon-list(wx:if!="{{list && list.length > 0}}")
-  view.groupon-item(
+  navigator.groupon-item(
     wx:for="{{list}}",
-    wx:key="{{item.id}}",
-    bindtap="doActive",
-    data-index="{{index}}",
-
+    wx:key="id",
+    url="{{'/pages/group/group?id=' + item.id}}",
   )
+    image.groupon-thumbnail(src="{{item.thumbnail}}")
+    view.groupon-info
+      text.groupon-title {{item.title}}
+      text.groupon-price ¥{{item.price}}
 
 view.footer
   navigator.add-new-button.footer-button(
@@ -19,3 +21,5 @@ view.footer
     disabled="{{isLoggingIn}}",
     loading="{{isLoggingIn}}",
   ) 创建接龙
+
+  view.version-number v0.1.0
