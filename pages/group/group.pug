@@ -7,7 +7,7 @@ view.group-detail(wx:if="{{isLoaded}}")
     view.info
       view.h1 {{title}}
       view.price ¥
-        text.price-number {{price}}
+        text.price-number {{price / 100}}
 
   view.description
     text {{description}}

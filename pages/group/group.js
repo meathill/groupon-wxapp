@@ -60,6 +60,9 @@ const config = Object.assign({
           isLoadingList: false,
         });
       })
+      .catch(error => {
+        alert(error.message);
+      })
       .then(() => {
         wx.hideLoading();
       });
@@ -73,8 +76,8 @@ const config = Object.assign({
   },
   doSubmit({detail}) {
     const {value} = detail;
-    const {number} = value;
-    if (!number) {
+    const number = Number(value.number);
+    if (!number || number < 0) {
       return alert('请填写参团数量');
     }
     this.setData({
@@ -87,9 +90,12 @@ const config = Object.assign({
     member.save()
       .then(() => {
         alert('接龙成功');
-        this.set({
+        this.setData({
           me: number,
         });
+      })
+      .catch(error => {
+        alert(error.message);
       })
       .then(() => {
         this.setData({

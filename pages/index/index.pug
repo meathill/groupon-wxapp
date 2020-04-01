@@ -7,7 +7,7 @@ view.groupon-list(wx:if!="{{list && list.length > 0}}")
     image.groupon-thumbnail(src="{{item.thumbnail}}")
     view.groupon-info
       text.groupon-title {{item.title}}
-      text.groupon-price ¥{{item.price}}
+      text.groupon-price ¥{{item.price / 100}}
 
 view.footer
   navigator.add-new-button.footer-button(
@@ -22,4 +22,4 @@ view.footer
     loading="{{isLoggingIn}}",
   ) 创建接龙
 
-  view.version-number v0.1.1
+  view.version-number v0.1.2
