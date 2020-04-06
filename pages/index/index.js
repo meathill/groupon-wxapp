@@ -42,18 +42,14 @@ Page({
     }
     query.limit(10);
     return query.find()
-      .then(bookmarks => {
-        bookmarks = bookmarks.map(bookmark => {
+      .then(groups => {
+        groups = groups.map(group => {
           return {
-            id: bookmark.id,
-            ...bookmark.toJSON(),
-            percent: 0,
-            audioCurrent: '00:00',
-            audioDurationText: '00:00',
-            isPlayed: false,
+            id: group.id,
+            ...group.toJSON(),
           };
         });
-        const list = merge(this.data.list, bookmarks);
+        const list = merge(this.data.list, groups);
         this.setData({
           list,
         });

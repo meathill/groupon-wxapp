@@ -14,7 +14,7 @@ view.footer
     wx:if="{{logged}}",
     url="/pages/group/new"
   ) 创建接龙
-  button.add-new-button(
+  button.add-new-button.footer-button(
     wx:else,
     open-type="getUserInfo",
     bindgetuserinfo="onGotUserInfo",
