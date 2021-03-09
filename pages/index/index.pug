@@ -1,25 +1,33 @@
-view.groupon-list(wx:if!="{{list && list.length > 0}}")
-  navigator.groupon-item(
-    wx:for="{{list}}",
-    wx:key="id",
-    url="{{'/pages/group/group?id=' + item.id}}",
-  )
-    image.groupon-thumbnail(src="{{item.thumbnail}}")
-    view.groupon-info
-      text.groupon-title {{item.title}}
-      text.groupon-price ¥{{item.price / 100}}
+image.header(
+  src="../../images/header.png",
+)
 
-view.footer
-  navigator.add-new-button.footer-button(
+view.main-nav
+  button.add-new-button(
     wx:if="{{logged}}",
-    url="/pages/group/new"
-  ) 创建接龙
-  button.add-new-button.footer-button(
+    disabled="{{isUploading}}",
+    loading="{{isUploading}}",
+    bindtap="doUpload",
+  )
+    image.button-icon(
+      src="../../images/upload.png",
+    )
+    view
+      text.button-label 上传图片
+      text.button-label-hint 选择您的大头照，进行卡通化
+  button.add-new-button(
     wx:else,
     open-type="getUserInfo",
     bindgetuserinfo="onGotUserInfo",
     disabled="{{isLoggingIn}}",
     loading="{{isLoggingIn}}",
-  ) 创建接龙
+  )
 
-  view.version-number v0.1.2
+    image.button-icon(
+      src="../../images/upload.png",
+    )
+    view
+      text.button-label 上传图片
+      text.button-label-hint 选择您的大头照，进行卡通化
+
+view.version-number v0.1.3

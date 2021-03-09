@@ -1,0 +1,25 @@
+view.groupon-list(wx:if!="{{list && list.length > 0}}")
+  navigator.groupon-item(
+    wx:for="{{list}}",
+    wx:key="id",
+    url="{{'/pages/group/group?id=' + item.id}}",
+  )
+    image.groupon-thumbnail(src="{{item.thumbnail}}")
+    view.groupon-info
+      text.groupon-title {{item.title}}
+      text.groupon-price ¥{{item.price / 100}}
+
+view.footer
+  navigator.add-new-button.footer-button(
+    wx:if="{{logged}}",
+    url="/pages/group/new"
+  ) 创建接龙
+  button.add-new-button.footer-button(
+    wx:else,
+    open-type="getUserInfo",
+    bindgetuserinfo="onGotUserInfo",
+    disabled="{{isLoggingIn}}",
+    loading="{{isLoggingIn}}",
+  ) 创建接龙
+
+  view.version-number v0.1.2

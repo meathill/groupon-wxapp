@@ -1,32 +1,49 @@
-.groupon-list
-  border-top 1rpx solid #EEE
-
-.groupon-item
-  border-bottom 1rpx solid #EEE
-  display flex
-  padding 1em
-
-.groupon-thumbnail
-  width 50px
-  height 50px
-  margin-right 1em
-
-.groupon-info
+page
   display flex
   flex-direction column
   justify-content space-between
-  text
-    display block
 
-.groupon-title
-  font-size 18px
+.header
+  position absolute
+  z-index 1
+  width 750rpx
+  height 500rpx
 
-.groupon-price
-  font-size 14px
+.main-nav
+  position relative
+  z-index 5
+  padding-top 400rpx
 
 .version-number
-  position absolute
-  right 1em
-  bottom 1em
-  color #DDD
-  font-size 8px
+  font-size 24rpx
+  color white
+  text-shadow 0 -1rpx #999
+  text-align center
+  line-height 3
+
+.add-new-button
+  background-color white
+  display flex
+  align-items center
+  width 630rpx !important
+  height 270rpx
+  border-radius 30rpx
+  border 8rpx solid #000
+  font-size 54rpx
+  margin 0 auto
+
+.button-icon
+  width 180rpx
+  height 180rpx
+  min-width 180rpx
+  margin-right 20rpx
+
+.button-label,
+.button-label-hint
+  display block
+  text-align left
+
+.button-label-hint
+  font-size 28rpx
+  font-weight 200
+  margin-top 10rpx

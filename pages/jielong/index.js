@@ -1,7 +1,9 @@
 //index.js
 //获取应用实例
 import AV from "../../libs/av-weapp-min";
-import {chooseImage, upload} from '../../libs/Weixin';
+import {GROUP} from "../../model/Group";
+import {merge} from "../../helper/util";
+import user from '../../mixins/user';
 
 /* global wx */
 
@@ -12,7 +14,9 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     logged: true,
     isLoggingIn: false,
-    isUploading: false,
+
+    list: [],
+    current: -1,
   },
   getReady() {
     if (!app.globalData.user) {
@@ -20,28 +24,41 @@ Page({
         logged: false,
       });
     }
+    if (this.data.list.length === 0) {
+      this.refresh();
+    }
     wx.hideLoading();
   },
-  async doUpload() {
-    const image = await chooseImage({
-      count: 1,
-    });
-    const [filePath] = image.tempFilePaths;
-    if (!filePath) {
-      return;
+  refresh(createdAt, greater = true) {
+    const query = new AV.Query(GROUP)
+      .descending('status')
+      .descending('createdAt');
+    if (createdAt) {
+      if (greater) {
+        query.greaterThan('createdAt', createdAt);
+      } else {
+        query.lessThan('createdAt', createdAt);
+      }
     }
-
-    wx.showLoading({
-      title: '上传中',
-      mask: true,
-    });
-
-    const result = await upload({
-      url: '',
-      filePath,
-      name: '',
-    });
-    wx.hideLoading();
+    query.limit(10);
+    return query.find()
+      .then(groups => {
+        groups = groups.map(group => {
+          return {
+            id: group.id,
+            ...group.toJSON(),
+          };
+        });
+        const list = merge(this.data.list, groups);
+        this.setData({
+          list,
+        });
+        wx.stopPullDownRefresh();
+      })
+      .catch(error => {
+        console.error(error.message);
+        alert(error.message);
+      });
   },
 
   onGotUserInfo(event) {
@@ -117,5 +134,11 @@ Page({
         this.getReady();
       };
     }
+  },
+  onPullDownRefresh() {
+    this.refresh();
+  },
+  onReachBottom() {
+    this.refresh(this.data.list[this.data.list.length - 1].createdAt, false);
   },
 });
