@@ -2,6 +2,8 @@
 //获取应用实例
 import AV from "../../libs/av-weapp-min";
 import {chooseImage, upload} from '../../libs/Weixin';
+import {UPLOAD_API} from '../../config/av';
+import Photo from "../../model/Photo";
 
 /* global wx */
 
@@ -37,10 +39,14 @@ Page({
     });
 
     const result = await upload({
-      url: '',
+      url: UPLOAD_API,
       filePath,
-      name: '',
     });
+    const photo = Photo();
+    photo.set('url', result.data);
+    photo.set('owner', app.globalData.user);
+    await photo.save();
+    console.log(result);
     wx.hideLoading();
   },
 

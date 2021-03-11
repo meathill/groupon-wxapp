@@ -4,8 +4,9 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
-    "es6": true,
+    "urlCheck": false,
+    "es6": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -15,25 +16,26 @@
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
+    "uglifyFileName": true,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": true,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
+    "userConfirmedBundleSwitch": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "bundle": false,
-    "useApiHook": true,
-    "useApiHostProcess": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.10.3",

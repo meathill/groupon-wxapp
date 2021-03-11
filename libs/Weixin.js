@@ -284,3 +284,12 @@ export function getClipboardData() {
     });
   });
 }
+
+export function mix(from, to) {
+  for (const [key, value] of Object.entries(from)) {
+    if (!(key in to)) {
+      to[key] = value;
+    }
+  }
+  return to;
+}

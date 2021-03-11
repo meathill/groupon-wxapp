@@ -1,0 +1,15 @@
+view.header
+  image.avatar(
+    wx:if="{{userInfo}}",
+    src="{{userInfo.avatarUrl}}",
+    mode="aspectFill",
+  )
+  button.get-user-info(
+    wx:else,
+    open-type="getUserInfo",
+    bindgetuserinfo="onGotUserInfo",
+    disabled="{{logging}}",
+    loading="{{logging}}",
+  ) 登录
+
+view.photo-list

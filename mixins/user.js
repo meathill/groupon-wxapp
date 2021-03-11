@@ -3,14 +3,37 @@ import {User} from "../libs/av-weapp-min";
 const app = getApp();
 
 export default {
+  data: {
+    logging: false,
+    logged: false,
+    userInfo: null,
+  },
+
   getReady() {
 
+  },
+
+  onLoad() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      });
+    } else {
+      app.userInfoReadyCallback = ({userInfo = null}) => {
+        if (!userInfo) {
+          return;
+        }
+        this.setData({
+          userInfo,
+        });
+      }
+    }
   },
 
   onGotUserInfo(event) {
     const {userInfo} = event.detail;
     this.setData({
-      isLoggingIn: true,
+      logging: true,
     });
 
     app.globalData.userInfo = userInfo;
@@ -26,6 +49,7 @@ export default {
       .then(() => {
         this.setData({
           logged: true,
+          userInfo,
         });
         this.getReady();
       })
@@ -35,7 +59,7 @@ export default {
       })
       .then(() => {
         this.setData({
-          isLogin: false,
+          logging: false,
         });
       });
   },

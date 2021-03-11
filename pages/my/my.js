@@ -1,66 +1,53 @@
-// pages/my/my.js
-Page({
+import user from '../../mixins/user';
+import {mix} from '../../libs/Weixin';
+import AV from "../../libs/av-weapp-min";
+import {merge} from "../../helper/util";
+import {PHOTO} from "../../model/Photo";
 
-  /**
-   * 页面的初始数据
-   */
+const init = mix(user, {
   data: {
-
+    ...user.data,
+    list: null,
+    isLoading: false,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  getReady() {
+    this.refresh();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  refresh(createdAt) {
+    const query = new AV.Query(PHOTO)
+      .descending('status')
+      .descending('createdAt');
+    if (createdAt) {
+      query.greaterThan('createdAt', createdAt);
+    }
+    query.limit(10);
+    return query.find()
+      .then(photos => {
+        photos = photos.map(group => {
+          return {
+            id: group.id,
+            ...group.toJSON(),
+          };
+        });
+        const list = createdAt ? merge(this.data.list, photos) : photos;
+        this.setData({
+          list,
+        });
+        wx.stopPullDownRefresh();
+      })
+      .catch(error => {
+        console.error(error.message);
+        alert(error.message);
+      });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onPullDownRefresh() {
+    this.refresh();
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onReachBottom() {
+    this.refresh(this.data.list[this.data.list.length - 1].createdAt, false);
   },
+});
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+Page(init);
