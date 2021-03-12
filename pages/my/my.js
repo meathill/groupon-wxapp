@@ -3,6 +3,7 @@ import {mix} from '../../libs/Weixin';
 import AV from "../../libs/av-weapp-min";
 import {merge} from "../../helper/util";
 import {PHOTO} from "../../model/Photo";
+import {UPLOAD_API} from '../../config/av';
 
 const init = mix(user, {
   data: {
@@ -25,10 +26,12 @@ const init = mix(user, {
     query.limit(10);
     return query.find()
       .then(photos => {
-        photos = photos.map(group => {
+        photos = photos.map(photo => {
+          const json = photo.toJSON();
           return {
-            id: group.id,
-            ...group.toJSON(),
+            id: photo.id,
+            ...json,
+            url: UPLOAD_API.replace(/\/u$/, '') + json.url,
           };
         });
         const list = createdAt ? merge(this.data.list, photos) : photos;

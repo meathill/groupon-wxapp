@@ -46,7 +46,9 @@ Page({
     photo.set('url', result.data);
     photo.set('owner', app.globalData.user);
     await photo.save();
-    console.log(result);
+    wx.navigateTo({
+      url: '/pages/my/photo?id=' + photo.id,
+    });
     wx.hideLoading();
   },
 

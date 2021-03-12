@@ -18,6 +18,7 @@ export default {
       this.setData({
         userInfo: app.globalData.userInfo,
       });
+      this.getReady();
     } else {
       app.userInfoReadyCallback = ({userInfo = null}) => {
         if (!userInfo) {
@@ -26,6 +27,7 @@ export default {
         this.setData({
           userInfo,
         });
+        this.getReady();
       }
     }
   },

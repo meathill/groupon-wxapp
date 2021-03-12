@@ -1,0 +1,13 @@
+view.photo-item
+  image.photo-image(
+    wx:if="{{url}}",
+    src="{{url}}",
+    mode="aspectFill",
+  )
+  text.photo-spinner(
+    wx:else,
+  ) 加载中
+
+button.share-button(
+  open-type="share",
+) 邀请围观群众

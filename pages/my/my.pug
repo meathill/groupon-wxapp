@@ -13,3 +13,12 @@ view.header
   ) 登录
 
 view.photo-list
+  navigator.photo-item(
+    wx:for="{{list}}",
+    wx:key="id",
+    url="{{'/pages/my/photo?id=' + item.id}}",
+  )
+    image.photo-image(
+      src="{{item.url}}",
+      mode="aspectFill",
+    )
