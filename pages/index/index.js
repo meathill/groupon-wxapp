@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 import AV from "../../libs/av-weapp-min";
-import {chooseImage, upload} from '../../libs/Weixin';
+import {chooseImage, upload, alert} from '../../libs/Weixin';
 import {UPLOAD_API} from '../../config/av';
 import Photo from "../../model/Photo";
 
@@ -42,8 +42,13 @@ Page({
       url: UPLOAD_API,
       filePath,
     });
+    const {err, msg} = JSON.parse(result.data);
+    if (err) {
+      await alert('上传失败。' + msg);
+      return;
+    }
     const photo = Photo();
-    photo.set('url', result.data);
+    photo.set('url', '/static/' + msg);
     photo.set('owner', app.globalData.user);
     await photo.save();
     wx.navigateTo({

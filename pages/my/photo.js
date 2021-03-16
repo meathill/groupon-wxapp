@@ -13,7 +13,7 @@ Page({
     const photo = AV.Object.createWithoutData(PHOTO, id);
     await photo.fetch();
     let url = photo.get('url');
-    url = UPLOAD_API.replace(/\/u$/, '') + url;
+    url = UPLOAD_API.replace(/\/up$/, '') + url;
     this.setData({
       url,
     });

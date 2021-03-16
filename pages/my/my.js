@@ -31,7 +31,7 @@ const init = mix(user, {
           return {
             id: photo.id,
             ...json,
-            url: UPLOAD_API.replace(/\/u$/, '') + json.url,
+            url: UPLOAD_API.replace(/\/up$/, '') + json.url,
           };
         });
         const list = createdAt ? merge(this.data.list, photos) : photos;
