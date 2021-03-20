@@ -1,5 +1,6 @@
 import {LEAN_APP_ID, LEAN_APP_SECRET} from "./config/av";
 import AV from './libs/av-weapp-min';
+import AVAdapter from './libs/leancloud-adapters-weapp';
 import {confirm, getAuthSetting, getUserInfo, setApp} from "./libs/Weixin";
 
 App({
@@ -22,6 +23,7 @@ App({
       });
 
     // other initialization work goes here
+    AV.setAdapters(AVAdapter);
     AV.init({
       appId: LEAN_APP_ID,
       appKey: LEAN_APP_SECRET,

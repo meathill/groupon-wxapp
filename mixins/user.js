@@ -1,4 +1,5 @@
 import {User} from "../libs/av-weapp-min";
+import {alert} from '../libs/Weixin';
 
 const app = getApp();
 
@@ -10,6 +11,9 @@ export default {
   },
 
   getReady() {
+
+  },
+  afterLogin() {
 
   },
 
@@ -53,7 +57,9 @@ export default {
           logged: true,
           userInfo,
         });
-        this.getReady();
+        if (this.afterLogin) {
+          this.afterLogin();
+        }
       })
       .catch(error => {
         console.error(error);

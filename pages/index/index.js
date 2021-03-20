@@ -1,15 +1,16 @@
 //index.js
 //获取应用实例
-import AV from "../../libs/av-weapp-min";
 import {chooseImage, upload, alert} from '../../libs/Weixin';
 import {UPLOAD_API} from '../../config/av';
 import Photo from "../../model/Photo";
+import {mix} from '../../libs/Weixin';
+import user from '../../mixins/user';
 
 /* global wx */
 
 const app = getApp();
 
-Page({
+const init = mix(user, {
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     logged: true,
@@ -22,7 +23,9 @@ Page({
         logged: false,
       });
     }
-    wx.hideLoading();
+  },
+  afterLogin() {
+    this.doUpload();
   },
   async doUpload() {
     const image = await chooseImage({
@@ -42,12 +45,13 @@ Page({
       url: UPLOAD_API,
       filePath,
     });
-    const {err, msg} = JSON.parse(result.data);
+    const {err, msg} = result;
     if (err) {
+      wx.hideLoading();
       await alert('上传失败。' + msg);
       return;
     }
-    const photo = Photo();
+    const photo = new Photo();
     photo.set('url', '/static/' + msg);
     photo.set('owner', app.globalData.user);
     await photo.save();
@@ -56,79 +60,5 @@ Page({
     });
     wx.hideLoading();
   },
-
-  onGotUserInfo(event) {
-    const {userInfo} = event.detail;
-    this.setData({
-      isLoggingIn: true,
-    });
-
-    app.globalData.userInfo = userInfo;
-    AV.User.loginWithWeapp()
-      .then(me => {
-        app.globalData.user = me;
-        if (!me.get('nickName')) {
-          me.set(userInfo);
-          return me.save();
-        }
-        return me;
-      })
-      .then(() => {
-        this.setData({
-          logged: true,
-        });
-        this.getReady();
-      })
-      .catch(error => {
-        console.error(error);
-        alert(error.message || '登录失败');
-      })
-      .then(() => {
-        this.setData({
-          isLogin: false,
-        });
-      });
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  onShow() {
-    wx.showLoading({
-      title: '加载中',
-      mask: true,
-    });
-
-    if (app.userInfoReadyCallback) {
-      this.getReady();
-    } else {
-      app.userInfoReadyCallback = () => {
-        this.getReady();
-      };
-    }
-  },
 });
+Page(init);

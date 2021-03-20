@@ -1,6 +1,6 @@
 {
   "name": "groupon",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "A groupon wxapp",
   "scripts": {
     "dev": "gulp watch",
@@ -15,17 +15,17 @@
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/register": "^7.9.0",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/register": "^7.13.8",
     "gulp": "^4.0.2",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-stylus": "^2.7.0"
   },
   "dependencies": {
-    "animate.css": "^3.7.2",
-    "lodash-es": "^4.17.15",
+    "animate.css": "^4.1.1",
+    "lodash-es": "^4.17.21",
     "lodash.keyby": "^4.6.0",
     "pug": "^3.0.2",
     "spinkit": "^2.0.1",

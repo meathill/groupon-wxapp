@@ -10,5 +10,5 @@ config/av.js
 *.wxss
 
 # repo
-libs/av-weapp-min.js
-libs/av-weapp-min.js.map
+libs/av-weapp-min.*
+libs/leancloud-adapters-weapp.*
