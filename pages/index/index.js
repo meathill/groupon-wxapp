@@ -54,7 +54,13 @@ const init = mix(user, {
     const photo = new Photo();
     photo.set('url', '/static/' + msg);
     photo.set('owner', app.globalData.user);
-    await photo.save();
+    try {
+      await photo.save();
+    } catch (e) {
+      wx.hideLoading();
+      await alert('保存图片失败。' + e.message);
+      return;
+    }
     wx.navigateTo({
       url: '/pages/my/photo?id=' + photo.id,
     });

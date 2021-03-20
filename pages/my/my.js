@@ -1,5 +1,5 @@
 import user from '../../mixins/user';
-import {mix} from '../../libs/Weixin';
+import {mix, alert} from '../../libs/Weixin';
 import AV from "../../libs/av-weapp-min";
 import {merge} from "../../helper/util";
 import {PHOTO} from "../../model/Photo";
@@ -18,20 +18,18 @@ const init = mix(user, {
 
   refresh(createdAt) {
     const query = new AV.Query(PHOTO)
-      .descending('status')
       .descending('createdAt');
     if (createdAt) {
-      query.greaterThan('createdAt', createdAt);
+      query.lessThan('createdAt', createdAt);
     }
     query.limit(10);
     return query.find()
       .then(photos => {
         photos = photos.map(photo => {
-          const json = photo.toJSON();
           return {
             id: photo.id,
-            ...json,
-            url: UPLOAD_API.replace(/\/up$/, '') + json.url,
+            url: UPLOAD_API.replace(/\/up\/?$/, '') + photo.get('url'),
+            model: photo,
           };
         });
         const list = createdAt ? merge(this.data.list, photos) : photos;
@@ -49,7 +47,8 @@ const init = mix(user, {
     this.refresh();
   },
   onReachBottom() {
-    this.refresh(this.data.list[this.data.list.length - 1].createdAt, false);
+    const last = this.data.list[this.data.list.length - 1];
+    this.refresh(last.model.get('createdAt'));
   },
 });
 
