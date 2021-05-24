@@ -15,18 +15,12 @@
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "@babel/register": "^7.13.8",
-    "gulp": "^4.0.2",
-    "gulp-pug": "^4.0.1",
-    "gulp-rename": "^2.0.0",
-    "gulp-stylus": "^2.7.0"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "lodash-es": "^4.17.21",
-    "lodash.keyby": "^4.6.0",
+    "lodash": "^4.17.21",
     "pug": "^3.0.2",
     "spinkit": "^2.0.1",
     "valid-url": "^1.0.9"

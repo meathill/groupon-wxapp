@@ -62,8 +62,8 @@ export default {
         }
       })
       .catch(error => {
-        console.error(error);
         alert(error.message || '登录失败');
+        console.error(error);
       })
       .then(() => {
         this.setData({
