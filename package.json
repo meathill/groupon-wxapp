@@ -15,8 +15,8 @@
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2"
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
