@@ -14,15 +14,10 @@
   "keywords": [],
   "author": "Meathill <meathill@gmail.com> (http://meathill.com/)",
   "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6"
-  },
   "dependencies": {
     "animate.css": "^4.1.1",
     "lodash": "^4.17.21",
     "pug": "^3.0.2",
-    "spinkit": "^2.0.1",
-    "valid-url": "^1.0.9"
+    "spinkit": "^2.0.1"
   }
 }
